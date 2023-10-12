@@ -78,7 +78,6 @@ export const createUserDocumentFromAuth = async(userAuth, additionalInfo) => {
   const userDocRef = doc(db, 'users', userAuth.uid)
 
   const userSnapshot = await getDoc(userDocRef)
-  console.log(userSnapshot.exists());
 
   //If user data does not exist
   //Create / set the document with the data from userAuth in my collection
@@ -106,7 +105,8 @@ export const createAuthUserWithEmailAndPassword = async(email, password) => {
 
 export const signInUserWithEmailAndPassword = async(email, password) => {
   if(!email || !password) return
-  return await signInWithEmailAndPassword(auth, email, password)
+  const test = await signInWithEmailAndPassword(auth, email, password)
+  return test
 }
 
 export const signOutUser = async () => await signOut(auth);

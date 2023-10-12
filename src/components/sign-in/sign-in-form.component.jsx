@@ -1,11 +1,11 @@
-import { useState } from 'react'
-
-import {createUserDocumentFromAuth, signInUserWithEmailAndPassword, signInWithGooglePopUp } from '../../utils/firebase/firebase.utils.js'
-import FormInput from '../form-input/form-input.component.jsx'
-import Button from '../button/button.component.jsx'
+import { useState, useContext } from 'react'
 import { userContext } from '../../contexts/user.context.jsx'
 
-import './sign-in-form.styles.scss'
+import { signInUserWithEmailAndPassword, signInWithGooglePopUp } from '../../utils/firebase/firebase.utils.js'
+import FormInput from '../form-input/form-input.component.jsx'
+import Button from '../button/button.component'
+
+import { ButtonsContainer, SignInContainer } from './sign-in-form.styles.js'
 
 const defaultFormFields = {
   email: '',
@@ -13,6 +13,8 @@ const defaultFormFields = {
 }
 
 const SignInForm = () => {
+
+  const {setCurrentUser} = useContext(userContext);
 
   const [formFields, setFormFields] = useState(defaultFormFields)
 
@@ -30,6 +32,7 @@ const SignInForm = () => {
     e.preventDefault()
     try {
       const {user} = await signInUserWithEmailAndPassword(email, password)
+      setCurrentUser(user)
       resetFormFields()
     } catch (error) {
       if(error.code === 'auth/wrong-password') {
@@ -44,34 +47,34 @@ const SignInForm = () => {
   }
 
   return (
-    <div className='sign-up-container'>
+    <SignInContainer>
       <h1>I already have an account</h1>
       <span>Sign in with your email and password</span>
       <form onSubmit={handleSubmit}>
         <FormInput
-        label={'email'}
-        inputOptions={{
-          value: email,
-          type: 'text',
-          onChange: handleChange,
-          name: 'email'
-        }}/>
+          label={'email'}
+          inputOptions={{
+            value: email,
+            type: 'text',
+            onChange: handleChange,
+            name: 'email'
+          }}/>
 
-      <FormInput
-        label={'password'}
-        inputOptions={{
-          value: password,
-          type: 'password',
-          onChange: handleChange,
-          name: 'password'
-        }}/>
+        <FormInput
+          label={'password'}
+          inputOptions={{
+            value: password,
+            type: 'password',
+            onChange: handleChange,
+            name: 'password'
+          }}/>
 
-        <div className='buttons-container'>
+        <ButtonsContainer>
           <Button type='submit'>sign in</Button>
-          <Button onClick={logGoogleUser} buttonType={'google'}>sign in with google</Button>
-        </div>
+          <Button onClick={logGoogleUser} buttonType='google'>sign in with google</Button>
+        </ButtonsContainer>
       </form>
-    </div>
+    </SignInContainer>
   )
 }
 
