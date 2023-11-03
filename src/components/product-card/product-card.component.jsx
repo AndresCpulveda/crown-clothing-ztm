@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import Button from '../button/button.component'
 import { FooterName, FooterPrice, ProductCardContainer, ProductFooter, ProductImage } from './product-card.styles.js';
-import { addItemToCart } from '../../store/cart/cart.action';
+import { addItemToCart } from '../../store/cart/cart.reducer';
 import { selectCartItems } from '../../store/cart/cart.selector';
 
 const ProductCard = ({product}) => {
@@ -18,7 +18,7 @@ const ProductCard = ({product}) => {
         <FooterName>{name}</FooterName>
         <FooterPrice>{price}</FooterPrice>
       </ProductFooter>
-      <Button buttonType='inverted' onClick={() => dispatch(addItemToCart(cartItems, product))}>Add to Cart</Button>
+      <Button buttonType='inverted' onClick={() => dispatch(addItemToCart({cartItems, product}))}>Add to Cart</Button>
     </ProductCardContainer>
   )
 }

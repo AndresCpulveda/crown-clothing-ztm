@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
 import './checkout-item.styles.js'
-import { CheckoutItemArrow, CheckoutItemContainer, CheckoutItemImg, CheckoutItemName, CheckoutItemQuantity, CheckoutItemValue, ImageContainer } from "./checkout-item.styles.js";
+import { CheckoutItemArrow, CheckoutItemContainer, CheckoutItemImg, CheckoutItemName, CheckoutItemQuantity, CheckoutItemValue, ImageContainer, CheckoutItemPrice, RemoveButton } from "./checkout-item.styles.js";
 import { selectCartItems } from "../../store/cart/cart.selector.js";
 import { addItemToCart, clearItemFromCart, removeItemFromCart } from "../../store/cart/cart.action.js";
 
@@ -31,8 +31,8 @@ const CheckoutProduct = ({product}) => {
           <span onClick={handleAddItem}>&#10095;</span>
         </CheckoutItemArrow>
       </CheckoutItemQuantity>
-      <span className="price">{price}</span>
-      <div className="remove-button" onClick={handleClearItem}>&#10005;</div>
+      <CheckoutItemPrice className="price">{price}</CheckoutItemPrice>
+      <RemoveButton className="remove-button" onClick={handleClearItem}>&#10005;</RemoveButton>
     </CheckoutItemContainer>
   )
 }
