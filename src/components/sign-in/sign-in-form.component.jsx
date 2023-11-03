@@ -1,9 +1,10 @@
-import { useState, useContext } from 'react'
-import { userContext } from '../../contexts/user.context.jsx'
+import { useState } from 'react'
 
 import { signInUserWithEmailAndPassword, signInWithGooglePopUp } from '../../utils/firebase/firebase.utils.js'
 import FormInput from '../form-input/form-input.component.jsx'
 import Button from '../button/button.component'
+import { setCurrentUser } from '../../store/user/user.reducer.js'
+import { useDispatch } from 'react-redux'
 
 import { ButtonsContainer, SignInContainer } from './sign-in-form.styles.js'
 
@@ -13,8 +14,7 @@ const defaultFormFields = {
 }
 
 const SignInForm = () => {
-
-  const {setCurrentUser} = useContext(userContext);
+  const dispatch = useDispatch()
 
   const [formFields, setFormFields] = useState(defaultFormFields)
 
@@ -32,7 +32,7 @@ const SignInForm = () => {
     e.preventDefault()
     try {
       const {user} = await signInUserWithEmailAndPassword(email, password)
-      setCurrentUser(user)
+      dispatch(setCurrentUser(user))
       resetFormFields()
     } catch (error) {
       if(error.code === 'auth/wrong-password') {

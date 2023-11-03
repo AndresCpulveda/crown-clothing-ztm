@@ -3,7 +3,7 @@ import {Routes, Route} from 'react-router-dom'
 import {useDispatch} from 'react-redux'
 
 import { onAuthStateChangedListener, createUserDocumentFromAuth } from "./utils/firebase/firebase.utils"
-import { setCurrentUser } from './store/user/user.action'
+import { setCurrentUser } from "./store/user/user.reducer"
 import Home from './routes/home/home.component'
 import NavigationBar from './components/navigation-bar/navigation-bar.component'
 import Shop from './routes/shop/shop.component'
@@ -19,7 +19,9 @@ function App() {
       if(user) {
         createUserDocumentFromAuth(user)
       }
-      dispatch(setCurrentUser(user))
+      //Here we assign an anonymous function that returns an object with the destructured values that we want from the object. The function is immediately called, passing the user as parameter
+      const pickedUser = user && (({accessToken, email}) => ({accessToken, email}))(user)
+      dispatch(setCurrentUser(pickedUser))
     })
     return unsuscribe
   }, [])

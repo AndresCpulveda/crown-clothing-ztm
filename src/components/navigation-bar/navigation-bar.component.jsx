@@ -15,7 +15,6 @@ const NavigationBar = () => {
 
   const {showingCart} = useContext(cartContext);
   const {currentUser} = useSelector(state => state.user);
-  console.log(currentUser);
 
   return (
     <>
