@@ -8,11 +8,11 @@ border-bottom: 1px solid darkgrey;
 padding: 15px 0;
 font-size: 20px;
 align-items: center;
+gap: 30px
 `
 
 export const ImageContainer = styled.div`
 width: 20%;
-padding-right: 30px;
 `
 
 export const CheckoutItemImg = styled.img`
@@ -21,26 +21,26 @@ height: 100%;
 `
 
 export const CheckoutItemName = styled.span`
-width: 23%;
+width: 20%;
 font-size: 17px;
 `
 
 export const CheckoutItemQuantity = styled.div`
-width: 23%;
+width: 18%;
 display: flex;
+gap: 10px
 `
 
 export const CheckoutItemArrow = styled.div`
-width: 23%;
 cursor: pointer;
 `
 
 export const CheckoutItemValue = styled.span`
-width: 23%;
-margin: 0 10px;
 `
 
-  // .remove-button {
-  //   padding-left: 12px;
-  //   cursor: pointer;
-  // }
+export const CheckoutItemPrice = styled.span`
+width: 20%;
+`
+export const RemoveButton = styled.div`
+  cursor: pointer;
+`
