@@ -18,7 +18,7 @@ const ProductCard = ({product}) => {
         <FooterName>{name}</FooterName>
         <FooterPrice>{price}</FooterPrice>
       </ProductFooter>
-      <Button buttonType='inverted' onClick={() => dispatch(addItemToCart({cartItems, product}))}>Add to Cart</Button>
+      <Button buttonType='inverted' onClick={() => dispatch(addItemToCart(product))}>Add to Cart</Button>
     </ProductCardContainer>
   )
 }

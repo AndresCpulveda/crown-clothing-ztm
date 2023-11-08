@@ -4,6 +4,7 @@ import { CheckoutContainer, CheckoutHeader, HeaderBlock, TotalSpan } from './che
 
 import CheckoutProduct from "../../components/checkout-item/checkout-item.component";
 import { selectCartItems, selectCartTotal } from "../../store/cart/cart.selector";
+import PaymentForm from "../../components/payment-form/payment-form.component.jsx";
 
 const Checkout = () => {
   
@@ -21,6 +22,7 @@ const Checkout = () => {
       </CheckoutHeader>
       {cartItems.map(product => <CheckoutProduct key={product.id} product={product} />)}
       <TotalSpan>Total: ${cartTotal}</TotalSpan>
+      {cartTotal ? <PaymentForm/> : null}
     </CheckoutContainer>
   )
 }

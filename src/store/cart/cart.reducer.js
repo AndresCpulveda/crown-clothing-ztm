@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { CART_ACTION_TYPES } from './cart.types';
 
 const CART_INITIAL_STATE = {
   isCartOpen: false,
@@ -41,18 +40,30 @@ const removeCartItem = (cartItems, cartItemToRemove) => {
   );
 };
 
+const clearCartItem = (cartItems, cartItemToClear) => cartItems.filter((cartItem) => cartItem.id !== cartItemToClear.id);
+
+
 const cartSlice = createSlice({
   name: 'cart',
   initialState: CART_INITIAL_STATE,
   reducers: {
     addItemToCart(state, action) {
-      const {cartItems, product} = action.payload;
-      state.cartItems = addCartItem(cartItems, product)
-    }
+      state.cartItems = addCartItem(state.cartItems, action.payload)
+    },
+    removeItemFromCart(state, action) {
+      state.cartItems = removeCartItem(state.cartItems, action.payload)
+    },
+    clearItemFromCart(state, action) {
+      state.cartItems = clearCartItem(state.cartItems, action.payload)
+    },
+    setIsCartOpen(state, action) {
+      console.log(action);
+      state.isCartOpen = action.payload
+    },
   }
 })
 
-export const {addItemToCart} = cartSlice.actions;
+export const {addItemToCart, removeItemFromCart, clearItemFromCart, setIsCartOpen} = cartSlice.actions;
 export const cartReducer = cartSlice.reducer
 
 // export const cartReducer = (state = CART_INITIAL_STATE, action = {}) => {

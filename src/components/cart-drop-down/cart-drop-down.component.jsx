@@ -8,7 +8,7 @@ import { selectCartItems } from '../../store/cart/cart.selector';
 
 const CartDropDown = () => {
 
-  const cartProducts = useSelector(selectCartItems)
+  const cartItems = useSelector(selectCartItems)
 
   const navigate = useNavigate()
 
@@ -19,7 +19,7 @@ const CartDropDown = () => {
   return (
     <CartDropdownContainer>
       <CartItems>
-        {cartProducts.length ? (cartProducts.map(product => <CartProduct key={product.id} product={product}/>)) : (<span className='empty-message'>Your cart is empty</span>)}
+        {cartItems.length ? (cartItems.map(product => <CartProduct key={product.id} product={product}/>)) : (<span className='empty-message'>Your cart is empty</span>)}
       </CartItems>
       <Button onClick={goToCheckoutHandler}>CHECKOUT</Button>
     </CartDropdownContainer>
